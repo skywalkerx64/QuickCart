@@ -1,196 +1,208 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
+import { computed } from "vue";
+import { Link, usePage } from "@inertiajs/vue3";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
+import NavLink from "@/Components/NavLink.vue";
+import ToggleTheme from "@/Components/Utils/ToggleTheme.vue";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/Components/ui/tooltip";
+import {
+    Home,
+    LineChart,
+    Package,
+    PanelLeft,
+    Search,
+    Settings,
+    ShoppingCart,
+    Users2,
+} from "lucide-vue-next";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import UserProfile from "@/Components/Auth/UserProfile.vue";
 
-const showingNavigationDropdown = ref(false);
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
-                <!-- Primary Navigation Menu -->
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 justify-between">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
-                            <div class="relative ms-3">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink
-                                            :href="route('profile.edit')"
-                                        >
-                                            Profile
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
-                            >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-                    class="sm:hidden"
+    <div class="flex min-h-screen w-full flex-col bg-muted/40">
+        <aside
+            class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex"
+        >
+            <nav class="flex flex-col items-center gap-4 px-2 py-4">
+                <Link
+                    :href="route('home')"
+                    class="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full hover:bg-muted text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
-                    <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                        >
+                    <ApplicationLogo
+                        class="h-5 w-5 transition-all group-hover:scale-110"
+                    />
+                </Link>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <NavLink
+                                :href="route('dashboard')"
+                                :active="route().current('dashboard')"
+                            >
+                                <Home class="h-5 w-5" />
+                                <span class="sr-only">Dashboard</span>
+                            </NavLink>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
                             Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div
-                        class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600"
-                    >
-                        <div class="px-4">
-                            <div
-                                class="text-base font-medium text-gray-800 dark:text-gray-200"
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <a
+                                href="#"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                             >
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="text-sm font-medium text-gray-500">
-                                {{ $page.props.auth.user.email }}
-                            </div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
+                                <ShoppingCart class="h-5 w-5" />
+                                <span class="sr-only">Orders</span>
+                            </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="right"> Orders </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <a
+                                href="#"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                             >
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
+                                <Package class="h-5 w-5" />
+                                <span class="sr-only">Products</span>
+                            </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="right"> Products </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <a
+                                href="#"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                            >
+                                <Users2 class="h-5 w-5" />
+                                <span class="sr-only">Customers</span>
+                            </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                            Customers
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </nav>
-
-            <!-- Page Heading -->
+            <nav class="mt-auto flex flex-col items-center gap-4 px-2 py-4">
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <a
+                                href="#"
+                                class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                            >
+                                <Settings class="h-5 w-5" />
+                                <span class="sr-only">Settings</span>
+                            </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="right"> Settings </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            </nav>
+        </aside>
+        <div class="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
             <header
-                class="bg-white shadow dark:bg-gray-800"
-                v-if="$slots.header"
+                class="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6"
             >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+                <Sheet>
+                    <SheetTrigger as-child>
+                        <Button size="icon" variant="outline" class="sm:hidden">
+                            <PanelLeft class="h-5 w-5" />
+                            <span class="sr-only">Toggle Menu</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" class="sm:max-w-xs">
+                        <nav class="grid gap-6 text-lg font-medium">
+                            <Link
+                                :href="route('home')"
+                                class="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full hover:bg-muted text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+                            >
+                                <ApplicationLogo
+                                    class="h-5 w-5 transition-all group-hover:scale-110"
+                                />
+                            </Link>
+                            <Link
+                                :href="route('dashboard')"
+                                :class="
+                                    route().current('dashboard')
+                                        ? 'flex items-center gap-4 px-2.5 text-foreground hover:text-foreground'
+                                        : 'flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                                "
+                            >
+                                <Home class="h-5 w-5" />
+                                Dashboard
+                            </Link>
+                            <a
+                                href="#"
+                                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                            >
+                                <ShoppingCart class="h-5 w-5" />
+                                Orders
+                            </a>
+                            <a
+                                href="#"
+                                class="flex items-center gap-4 px-2.5 text-muted-foreground"
+                            >
+                                <Package class="h-5 w-5" />
+                                Products
+                            </a>
+                            <a
+                                href="#"
+                                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                            >
+                                <Users2 class="h-5 w-5" />
+                                Customers
+                            </a>
+                            <a
+                                href="#"
+                                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                            >
+                                <LineChart class="h-5 w-5" />
+                                Settings
+                            </a>
+                        </nav>
+                    </SheetContent>
+                </Sheet>
 
-            <!-- Page Content -->
-            <main>
+                <slot name="header"/>
+
+                <div class="relative ml-auto flex items-center md:grow-0">
+                    <Search
+                        class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
+                    />
+                    <Input
+                        type="search"
+                        placeholder="Search..."
+                        class="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                    />
+                </div>
+                <ToggleTheme/>
+                <UserProfile :user="user" />
+            </header>
+            <main
+                class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8"
+            >
                 <slot />
             </main>
         </div>
