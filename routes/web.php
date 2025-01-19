@@ -9,6 +9,7 @@ use Inertia\Inertia;
 
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+Route::get('/shop', [PublicController::class, 'shop'])->name('shop');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/products/featured', [ProductController::class, 'featuredProducts'])->name('products.featured');
     Route::resource('products', ProductController::class);
 });
 

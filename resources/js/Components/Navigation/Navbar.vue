@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -25,6 +25,8 @@ import { Separator } from "@/Components/ui/separator";
 import { Menu } from "lucide-vue-next";
 import ToggleTheme from "@/Components/Utils/ToggleTheme.vue";
 import ApplicationLogo from "../ApplicationLogo.vue";
+import { usePage } from "@inertiajs/vue3";
+import UserProfile from "../Auth/UserProfile.vue";
 
 interface RouteProps {
     href: string;
@@ -49,6 +51,11 @@ const routeList: RouteProps[] = [
         label: "Contact",
     },
 ];
+
+const page = usePage();
+const user = computed(() => page.props.auth.user);
+
+const isConnected = computed(() => user.value !== null);
 
 const isOpen = ref<boolean>(false);
 </script>
@@ -130,17 +137,21 @@ const isOpen = ref<boolean>(false);
             </NavigationMenuList>
         </NavigationMenu>
 
-        <div class="hidden lg:flex gap-2 text-base">
+        <div class="hidden lg:flex justify-center items-center gap-2 text-base" >
             <Cart/>
-            <Button as-child aria-label="Login" variant="ghost">
-                <a aria-label="Login" href="login"> Login </a>
-            </Button>
+            <span v-if="!isConnected" class="flex items-center gap-2">
+                <Button as-child aria-label="Login" variant="ghost">
+                    <a aria-label="Login" href="login"> Login </a>
+                </Button>
 
-            <Button as-child aria-label="Login">
-                <a aria-label="View on GitHub" href="register"> Sign up Free </a>
-            </Button>
+                <Button as-child aria-label="Login">
+                    <a aria-label="Register" href="register"> Sign up Free </a>
+                </Button>
+            </span>
+            <UserProfile v-else :user="user" />
 
             <ToggleTheme />
         </div>
+
     </header>
 </template>

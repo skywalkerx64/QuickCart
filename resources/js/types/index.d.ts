@@ -3,6 +3,13 @@ export interface User {
     name: string;
     email: string;
     email_verified_at?: string;
+    roles: Role[];
+}
+
+export interface Role {
+    title?: string;
+    alias: string;
+    description?: string;
 }
 
 export type PageProps<

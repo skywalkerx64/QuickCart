@@ -5,9 +5,6 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Database\Factories\UserFactory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -26,6 +23,17 @@ class UserSeeder extends Seeder
         ];
 
         $this->createAdmins($admins);
+
+        $customers = [
+            [
+                'name' => 'Jane Doe',
+                'email' => 'customer@mail.test',
+                'password' => 'password',
+                'email_verified_at' => now(),
+            ],
+        ];
+
+        $this->createCustomers($customers);
     }
 
     public function createAdmins(array $admins)
@@ -37,6 +45,18 @@ class UserSeeder extends Seeder
             $user = User::create($admin);
 
             $user->roles()->attach($admin_role?->id);
+        }
+    }
+
+    public function createCustomers(array $customers)
+    {
+
+        $customer_role = Role::where('alias', Role::CLIENT_ROLE_ALIAS)->first();
+        foreach ($customers as $customer) {
+
+            $user = User::create($customer);
+
+            $user->roles()->attach($customer_role?->id);
         }
     }
 }

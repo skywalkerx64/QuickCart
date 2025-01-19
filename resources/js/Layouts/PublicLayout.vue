@@ -9,6 +9,8 @@ import { Toaster } from '@/Components/ui/sonner';
         <AppHeader />
         <slot />
         <Toaster />
-        <AppFooter />
+        <div class="flex flex-col justify-end mt-8">
+            <AppFooter />
+        </div>
     </body>
 </template>

@@ -35,6 +35,11 @@ class ProductController extends Controller
         ]);
     }
 
+    public function featuredProducts()
+    {
+        return response(Product::orderByDesc('created_at')->limit(3)->get());
+    }
+
     /**
      * Store a newly created product in storage.
      */
