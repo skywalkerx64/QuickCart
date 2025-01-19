@@ -76,13 +76,13 @@ const user = computed(() => page.props.auth.user);
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger as-child>
-                            <a
-                                href="#"
-                                class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                            <NavLink
+                                :href="route('products.index')"
+                                :active="route().current('products.index')"
                             >
-                                <Package class="h-5 w-5" />
-                                <span class="sr-only">Products</span>
-                            </a>
+                            <Package class="h-5 w-5" />
+                            <span class="sr-only">Products</span>
+                            </NavLink>
                         </TooltipTrigger>
                         <TooltipContent side="right"> Products </TooltipContent>
                     </Tooltip>
