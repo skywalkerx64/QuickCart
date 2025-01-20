@@ -171,7 +171,10 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product_data) {
-            $product = Product::create($product_data);
+            $product = Product::create([
+                ...$product_data,
+                'user_id' => 1
+            ]);
             $cover = database_path('seeders/files/' . implode('-', explode(' ', $product_data['name'])) . '.jpg');
             if (file_exists($cover)) {
                 $product->addMedia($cover)->preservingOriginal()->toMediaCollection(Product::COVER_MEDIA_COLLECTION);

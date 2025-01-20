@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'kkiapay_key',
     ];
 
     /**
@@ -54,6 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

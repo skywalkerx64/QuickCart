@@ -31,7 +31,10 @@ class Product extends Model implements HasMedia
         'price',
         'category',
         'status',
+        'user_id',
     ];
+
+    protected $with = ['user'];
 
     protected $appends = [
         'cover',
@@ -46,6 +49,11 @@ class Product extends Model implements HasMedia
     public function getImagesAttribute()
     {
         return $this->getMedia(self::IMAGES_MEDIA_COLLECTION)->pluck('original_url')->toArray();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)

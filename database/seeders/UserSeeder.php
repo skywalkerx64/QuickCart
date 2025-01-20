@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
                 'name' => 'John Doe',
                 'email' => 'johndoe@mail.test',
                 'password' => 'password',
+                'kkiapay_key' => 'bfbd7210bdec11ef98b5330a16785eaa',
                 'email_verified_at' => now(),
             ],
         ];
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
                 'name' => 'Jane Doe',
                 'email' => 'customer@mail.test',
                 'password' => 'password',
+                'kkiapay_key' => 'bfbd7210bdec11ef98b5330a16785eaa',
                 'email_verified_at' => now(),
             ],
         ];

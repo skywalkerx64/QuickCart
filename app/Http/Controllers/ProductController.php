@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Http\Requests\Product\SearchProductRequest;
 use App\Http\Requests\Product\StoreProductRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
      * Display a listing of the product.
      */
     public function index(SearchProductRequest $request) {
-        $products = Product::query()->orderByDesc('created_at');
+        $products = Product::query()->orderByDesc('created_at')->where('user_id', Auth::user()->id);
         $per_page = $request->per_page ?? 10;
 
 
@@ -45,7 +46,10 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->validated());
+        $product = Product::create([
+            ...$request->validated(),
+            'user_id' => Auth::user()->id
+        ]);
 
         if($request->hasFile('cover')) {
             $product->addMediaFromRequest('cover')->toMediaCollection(Product::COVER_MEDIA_COLLECTION);

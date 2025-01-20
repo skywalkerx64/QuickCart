@@ -22,6 +22,11 @@ class PublicController extends Controller
         return Inertia::render('Public/Contact');
     }
 
+    public function checkout()
+    {
+        return Inertia::render('Public/Checkout');
+    }
+
     public function shop(SearchProductRequest $request)
     {
         $name = $request->name;
