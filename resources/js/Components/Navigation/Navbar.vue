@@ -133,7 +133,7 @@ const isOpen = ref<boolean>(false);
           <a aria-label="Register" href="register"> Sign up Free </a>
         </Button>
       </span>
-      <UserProfile v-else :user="user" />
+      <UserProfile v-if="isConnected" :user="user" />
 
       <ToggleTheme />
     </div>
