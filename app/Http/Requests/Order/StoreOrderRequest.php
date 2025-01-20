@@ -30,7 +30,8 @@ class StoreOrderRequest extends FormRequest
             'products.*.quantity' => 'numeric|integer',
             'customer' => 'array|required',
             'customer.email' => 'string|email|required',
-            'customer.contact' => 'string|nullable',
+            'customer.name' => 'required|nullable',
+            'customer.contact' => 'required|nullable',
             'customer.address' => 'string|nullable',
         ];
     }

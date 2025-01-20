@@ -28,7 +28,7 @@ class Order extends Model
         'status',
     ];
 
-    protected $with = ['customer'];
+    protected $with = ['customer', 'details.product'];
 
     public function customer()
     {

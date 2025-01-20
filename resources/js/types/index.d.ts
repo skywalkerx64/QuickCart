@@ -43,3 +43,42 @@ export type ProductCategory = {
     created_at?: string;
     updated_at?: string;
 }
+
+export type Order = {
+    id: number;
+    reference: string;
+    customer_id?: number;
+    customer: Customer;
+    details: OrderDetail[];
+    total?: number;
+    tax?: number;
+    status?: number;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export type OrderDetail = {
+    id: number;
+    order_id?: number;
+    order?: Order;
+    product_id?: number;
+    product: Prodcut;
+    total?: number;
+    tax?: number;
+    quantity?: number;
+    created_at?: string;
+    updated_at?: string;
+}
+
+export type Customer = {
+    id: number;
+    reference: string;
+    name? :string;
+    email? :string;
+    contact? :string;
+    address?: string;
+    user_id?: number;
+    user?: User;
+    created_at?: string;
+    updated_at?: string;
+}

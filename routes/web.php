@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products/featured', [ProductController::class, 'featuredProducts'])->name('products.featured');
     Route::resource('products', ProductController::class);
+    Route::resource('orders', OrderController::class)->except(['store']);
+    Route::get('orders/{order}/process', [OrderController::class, 'process'])->name(['orders.process']);
 });
 
 require __DIR__.'/auth.php';

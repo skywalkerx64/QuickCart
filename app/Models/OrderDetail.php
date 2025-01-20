@@ -22,6 +22,11 @@ class OrderDetail extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format(config('panel.datetime_format'));

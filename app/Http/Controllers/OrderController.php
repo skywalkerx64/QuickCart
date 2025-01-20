@@ -13,6 +13,16 @@ use Inertia\Inertia;
 
 class OrderController extends Controller
 {
+    public function index(Request $request)
+    {
+        $orders = Order::query()->orderByDesc('created_at');
+        $per_page = $request->per_page ?? 10;
+
+
+        return Inertia::render('Order/Index', [
+            'orders' => $orders->paginate($per_page),
+        ]);
+    }
     public function store(StoreOrderRequest $request)
     {
         $customer_data = $request->customer;
@@ -25,6 +35,7 @@ class OrderController extends Controller
             [
                 'reference' => 'CUST' . Str::random(8),
                 'email' => $customer_data['email'],
+                'name' => $customer_data['name'],
                 'contact' => $customer_data['contact'],
                 'address' => $customer_data['address'],
             ]
@@ -56,5 +67,13 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('shop');
+    }
+
+    public function processOrder(Order $order)
+    {
+        $order->update([
+            'status' => Order::DELIVERED_STATUS
+        ]);
+
     }
 }

@@ -23,8 +23,8 @@ function checkout() {
     callback: '',
     key: cart.getKkiapayKey,
     sandbox: true,
-    phone: '61000000',
-    name: createOrderForm.customer.name,
+    phone: createOrderForm.customer.contact,
+    fullname: createOrderForm.customer.name,
     email: createOrderForm.customer.email,
   });
 }
@@ -34,7 +34,7 @@ const createOrderForm = useForm({
   customer: {
     name: '',
     email: '',
-    contact: '',
+    contact: '61000000',
     address: '',
   },
 });
@@ -69,13 +69,13 @@ onMounted(() => {
           <form @submit.prevent="checkout" class="grid gap-4">
             <div class="flex flex-col md:flex-row gap-8">
               <div class="flex flex-col w-full gap-1.5">
-                <Label for="name">Name</Label>
-                <Input id="name" type="text" placeholder="John" v-model="createOrderForm.customer.name" />
+                <Label for="name">Name <span class="text-red-500">*</span></Label>
+                <Input id="name" required type="text" placeholder="John" v-model="createOrderForm.customer.name" />
               </div>
 
               <div class="flex flex-col w-full gap-1.5">
-                <Label for="last-name">contact</Label>
-                <Input id="last-name" type="text" placeholder="Doe" v-model="createOrderForm.customer.contact" />
+                <Label for="contact">Contact <span class="text-red-500">*</span></Label>
+                <Input id="contact" required type="text" placeholder="Doe" v-model="createOrderForm.customer.contact" />
               </div>
             </div>
 
