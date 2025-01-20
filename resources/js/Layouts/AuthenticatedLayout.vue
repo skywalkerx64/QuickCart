@@ -72,7 +72,7 @@ const user = computed(() => page.props.auth.user);
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger as-child>
-                <NavLink :href="route('settings')" :active="route().current('settings')">
+              <NavLink :href="route('settings')" :active="route().current('settings')">
                 <Settings class="h-5 w-5" />
                 <span class="sr-only">Settings</span>
               </NavLink>
@@ -83,7 +83,7 @@ const user = computed(() => page.props.auth.user);
       </nav>
     </aside>
     <div class="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-      <header class="sticky top-0 z-30 flex h-14  justify-between items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+      <header class="sticky top-0 z-30 flex h-14 justify-between items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
         <Sheet>
           <SheetTrigger as-child>
             <Button size="icon" variant="outline" class="sm:hidden">
@@ -121,8 +121,7 @@ const user = computed(() => page.props.auth.user);
         </Sheet>
 
         <slot name="header" />
-        <ToggleTheme />
-        <UserProfile :user="user" />
+        <span class="flex items-center gap-4">"<ToggleTheme /> <UserProfile :user="user" /></span>
       </header>
       <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
         <slot />
