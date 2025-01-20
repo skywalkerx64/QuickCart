@@ -113,6 +113,13 @@ const isOpen = ref<boolean>(false);
             <Button v-if="isConnected && !isAdmin" as-child variant="ghost" class="justify-start text-base">
               <a :href="route('orders.my-orders')"> My Orders </a>
             </Button>
+            <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
+              <a href="login">Log In </a>
+            </Button>
+            <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
+              <a href="register">Sign Up Free </a>
+            </Button>
+
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
