@@ -44,7 +44,7 @@ const page = usePage();
 const user = computed<User>(() => page.props.auth.user);
 
 const isConnected = computed(() => user.value !== null);
-const isAdmin = computed(() => isConnected ? hasRoles(user.value, [ADMIN_ROLE_ALIAS]) : false);
+const isAdmin = computed(() => (isConnected ? hasRoles(user.value, [ADMIN_ROLE_ALIAS]) : false));
 
 const isOpen = ref<boolean>(false);
 </script>
@@ -83,9 +83,13 @@ const isOpen = ref<boolean>(false);
                 </a>
               </Button>
               <Button as-child variant="ghost" class="justify-start text-base">
-                <a @click="isOpen = false" :href="route('orders.my-orders')">
-                    My Orders
-                </a>
+                <a @click="isOpen = false" :href="route('orders.my-orders')"> My Orders </a>
+              </Button>
+              <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
+                <a href="login">Log In </a>
+              </Button>
+              <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
+                <a href="register">Sign Up Free </a>
               </Button>
             </div>
           </div>
@@ -113,13 +117,6 @@ const isOpen = ref<boolean>(false);
             <Button v-if="isConnected && !isAdmin" as-child variant="ghost" class="justify-start text-base">
               <a :href="route('orders.my-orders')"> My Orders </a>
             </Button>
-            <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
-              <a href="login">Log In </a>
-            </Button>
-            <Button v-if="!isConnected" as-child variant="ghost" class="justify-start text-base">
-              <a href="register">Sign Up Free </a>
-            </Button>
-
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
