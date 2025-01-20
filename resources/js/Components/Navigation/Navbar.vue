@@ -59,6 +59,7 @@ const isOpen = ref<boolean>(false);
     <!-- Mobile -->
     <div class="flex items-center gap-6 justify-center lg:hidden">
       <Cart />
+      <UserProfile v-if="isConnected" :user="user" />
 
       <Sheet v-model:open="isOpen">
         <SheetTrigger as-child>
