@@ -3,11 +3,20 @@ import { Link } from '@inertiajs/vue3';
 import { Button } from '@/Components/ui/button';
 import { HeartIcon, PlusIcon } from 'lucide-vue-next';
 import { Product } from '@/types';
+import { useCartStore } from '@/stores/cart';
+import { toast } from 'vue-sonner';
+
+
+const cart = useCartStore();
 
 const props = defineProps<{
   product: Product;
 }>();
 const product = props.product;
+
+function alertProdutAdded() {
+    toast('Product added to cart')
+}
 </script>
 
 <template>
@@ -27,13 +36,13 @@ const product = props.product;
 
       <!-- Price and Availability -->
       <div class="mt-4 flex justify-between items-center">
-        <p class="text-xl font-bold">$28.99</p>
+        <p class="text-xl font-bold">${{ product.price }}</p>
       </div>
       <div class="flex gap-4 mt-4">
         <Button variant="outline" size="icon" class="flex-shrink-0">
           <HeartIcon class="size-4" />
         </Button>
-        <Button class="w-full"> <PlusIcon class="size-4 me-1" /> Add to Card </Button>
+        <Button @click="cart.addItem(product); alertProdutAdded()" class="w-full"> <PlusIcon class="size-4 me-1" /> Add to Card </Button>
       </div>
     </div>
   </div>

@@ -70,7 +70,9 @@ const isOpen = ref<boolean>(false);
 
         <a href="/" class="font-bold text-lg flex items-center gap-2"><ApplicationLogo class="size-8" /> QuickCart</a>
         <!-- Mobile -->
-        <div class="flex items-center lg:hidden">
+        <div class="flex items-center gap-6 justify-center lg:hidden">
+            <Cart/>
+
             <Sheet v-model:open="isOpen">
                 <SheetTrigger as-child>
                     <Menu @click="isOpen = true" class="cursor-pointer" />

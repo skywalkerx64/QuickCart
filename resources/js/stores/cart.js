@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
@@ -19,7 +19,14 @@ export const useCartStore = defineStore('cart', {
       if (existingItem) {
         existingItem.quantity++;
       } else {
-        this.items.push({ ...product, quantity: 1 });
+        let productItem = {
+            id :product.id,
+            name :product.name,
+            price :product.price,
+            cover: product.cover,
+            quantity :1
+        }
+        this.items.push(productItem);
       }
     },
     removeItem(productId) {
@@ -38,3 +45,7 @@ export const useCartStore = defineStore('cart', {
     },
   },
 });
+
+if (import.meta.hot) {
+    import.meta.hot.accept(acceptHMRUpdate(useCartStore, import.meta.hot))
+  }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LandingLayout from '@/Layouts/PublicLayout.vue';
+import PublicLayout from '@/Layouts/PublicLayout.vue';
 import HeroSection from '@/Pages/Public/components/HeroSection.vue';
 import FaqSection from '@/Pages/Public/components/FaqSection.vue';
 import FeaturesSection from '@/Pages/Public/components/FeaturesSection.vue';
@@ -14,10 +14,10 @@ const props = defineProps<{
 
 <template>
   <Head title="QuickCart - Your Ultimate Shopping Companion" />
-  <LandingLayout>
+  <PublicLayout>
     <HeroSection />
     <FeaturedProductsSection :products="props.featuredProducts"/>
     <FeaturesSection />
     <FaqSection />
-  </LandingLayout>
+  </PublicLayout>
 </template>
