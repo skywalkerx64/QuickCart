@@ -25,7 +25,7 @@ const UpdateKeyForm = useForm({
       <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">Settings</h2>
     </template>
     <div class="py-10">
-      <Card class="w-1/2">
+      <Card class="w-full md:w-1/2">
         <CardHeader>
           <CardTitle>API Kkiapay</CardTitle>
           <CardDescription>
