@@ -40,13 +40,24 @@ class PublicController extends Controller
 
         $products = Product::query()->where('status', Product::PUBLISHED_STATUS)->orderByDesc('created_at');
 
-        if($name && $name != '') $products = $products->where('name', 'like', '%' . $name . '%');
-        if($description && $description != '') $products = $products->where('description', 'like', '%' . $description . '%');
-        if($category && $category != '') $products = $products->where('category', $category);
+        if ($name && $name != '') $products = $products->where('name', 'like', '%' . $name . '%');
+        if ($description && $description != '') $products = $products->where('description', 'like', '%' . $description . '%');
+        if ($category && $category != '') $products = $products->where('category', $category);
 
         return Inertia::render('Public/Shop', [
             'products' => $products->paginate($per_page),
             'categories' => ProductCategory::all(),
         ]);
+    }
+
+    public function updateKey(Request $request)
+    {
+        $user = $request->user();
+
+        $user->update([
+            'kkiapay_key'  => $request->kkiapay_key
+        ]);
+
+        return back();
     }
 }

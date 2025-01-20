@@ -44,7 +44,7 @@ const page = usePage();
 const user = computed<User>(() => page.props.auth.user);
 
 const isConnected = computed(() => user.value !== null);
-const isAdmin = computed(() => hasRoles(user.value, [ADMIN_ROLE_ALIAS]));
+const isAdmin = computed(() => isConnected ? hasRoles(user.value, [ADMIN_ROLE_ALIAS]) : false);
 
 const isOpen = ref<boolean>(false);
 </script>
@@ -105,7 +105,7 @@ const isOpen = ref<boolean>(false);
               </a>
             </Button>
 
-            <Button v-if="!isAdmin" as-child variant="ghost" class="justify-start text-base">
+            <Button v-if="isConnected && !isAdmin" as-child variant="ghost" class="justify-start text-base">
               <a :href="route('orders.my-orders')"> My Orders </a>
             </Button>
           </NavigationMenuLink>

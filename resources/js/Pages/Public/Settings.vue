@@ -33,7 +33,7 @@ const UpdateKeyForm = useForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-            <form @submit.prevent="UpdateKeyForm.patch(route('profile.update'))">
+            <form @submit.prevent="UpdateKeyForm.post(route('settings.update-key'))">
 
                 <div class="grid gap-6">
                   <div class="grid gap-3">

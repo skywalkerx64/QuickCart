@@ -57,7 +57,6 @@ onMounted(() => {
 <template>
   <Head title="QuickCart - Checkout" />
   <LandingLayout class="h-full">
-    <HeroCarrousel />
     <div class="text-center pt-10 px-4">
       <div class="font-bold text-4xl">Checkout</div>
       <p class="max-w-screen-md mx-auto mt-4 text-muted-foreground">Please provide your contact information and shipping address so we can process your order. We will send you an email with your order summary and shipping details.</p>

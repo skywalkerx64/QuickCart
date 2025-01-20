@@ -89,7 +89,7 @@ class OrderController extends Controller
     {
         $per_page = $request->per_page ?? 10;
         return Inertia::render('Order/MyOrders', [
-            'orders' => Order::query()->orderByDesc('created_at')->whereHas('customer', fn($q) => $q->where('id', Auth::user()->id))->paginate($per_page),
+            'orders' => Order::query()->orderByDesc('created_at')->whereHas('customer', fn($q) => $q->where('user_id', Auth::user()->id))->paginate($per_page),
         ]);
     }
 }

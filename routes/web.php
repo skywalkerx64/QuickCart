@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('orders/me', [OrderController::class, 'myOrders'])->name('orders.my-orders');
     Route::resource('orders', OrderController::class)->except(['store']);
     Route::get('orders/{order}/process', [OrderController::class, 'processOrder'])->name('orders.process');
+    Route::post('settings/update-key', [PublicController::class, 'updateKey'])->name('settings.update-key');
 });
 
 require __DIR__.'/auth.php';
