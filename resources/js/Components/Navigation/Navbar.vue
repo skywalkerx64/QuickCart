@@ -82,6 +82,11 @@ const isOpen = ref<boolean>(false);
                   {{ label }}
                 </a>
               </Button>
+              <Button as-child variant="ghost" class="justify-start text-base">
+                <a @click="isOpen = false" :href="route('orders.my-orders')">
+                    My Orders
+                </a>
+              </Button>
             </div>
           </div>
 

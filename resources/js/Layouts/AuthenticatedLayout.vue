@@ -100,22 +100,22 @@ const user = computed(() => page.props.auth.user);
                 <Home class="h-5 w-5" />
                 Dashboard
               </Link>
-              <a href="#" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+              <Link :href="route('orders.index')" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
                 <ShoppingCart class="h-5 w-5" />
                 Orders
-              </a>
-              <a href="#" class="flex items-center gap-4 px-2.5 text-muted-foreground">
+              </Link>
+              <Link :href="route('products.index')" class="flex items-center gap-4 px-2.5 text-muted-foreground">
                 <Package class="h-5 w-5" />
                 Products
-              </a>
-              <a href="#" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+              </Link>
+              <Link :href="route('customers.index')" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
                 <Users2 class="h-5 w-5" />
                 Customers
-              </a>
-              <a href="#" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
+              </Link>
+              <Link :href="route('settings')" class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground">
                 <LineChart class="h-5 w-5" />
                 Settings
-              </a>
+              </Link>
             </nav>
           </SheetContent>
         </Sheet>
