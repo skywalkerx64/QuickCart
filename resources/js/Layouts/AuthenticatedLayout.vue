@@ -121,7 +121,7 @@ const user = computed(() => page.props.auth.user);
         </Sheet>
 
         <slot name="header" />
-        <span class="flex items-center gap-4">"<ToggleTheme /> <UserProfile :user="user" /></span>
+        <span class="flex items-center gap-4"><ToggleTheme /> <UserProfile :user="user" /></span>
       </header>
       <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
         <slot />
