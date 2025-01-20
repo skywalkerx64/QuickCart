@@ -26,6 +26,10 @@ class PublicController extends Controller
     {
         return Inertia::render('Public/Checkout');
     }
+    public function settings()
+    {
+        return Inertia::render('Public/Settings');
+    }
 
     public function shop(SearchProductRequest $request)
     {

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Mail\OrderShipped;
 use App\Models\OrderDetail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Order\StoreOrderRequest;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -75,5 +78,18 @@ class OrderController extends Controller
             'status' => Order::DELIVERED_STATUS
         ]);
 
+        $customer = $order->customer;
+
+        // Mail::to($customer->email)->send(new OrderShipped($order));
+
+        return redirect()->route('orders.index');
+    }
+
+    public function myOrders(Request $request)
+    {
+        $per_page = $request->per_page ?? 10;
+        return Inertia::render('Order/MyOrders', [
+            'orders' => Order::query()->orderByDesc('created_at')->whereHas('customer', fn($q) => $q->where('id', Auth::user()->id))->paginate($per_page),
+        ]);
     }
 }

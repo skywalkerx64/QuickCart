@@ -7,7 +7,7 @@ const props = defineProps<{ orders: any }>();
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Orders" />
 
     <AuthenticatedLayout>
         <template #header>

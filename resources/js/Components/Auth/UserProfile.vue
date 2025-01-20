@@ -50,7 +50,7 @@ const user = props.user;
       </DropdownMenuItem>
       <DropdownMenuItem v-else>
         <Package />
-        <Link :href="route('dashboard')"> My Orders </Link>
+        <Link :href="route('orders.my-orders')"> My Orders </Link>
       </DropdownMenuItem>
       <DropdownMenuItem>
         <BadgeCheck />

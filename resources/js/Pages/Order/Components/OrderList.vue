@@ -115,8 +115,8 @@ const props = defineProps<{
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <Link :href="route('products.edit', order.id)" class="w-full cursor-pointer"><DropdownMenuItem class="flex items-center gap-4"> <Truck class="size-4"/> Process</DropdownMenuItem></Link>
-                        <Link :href="route('products.destroy', order.id)" method="delete" class="w-full cursor-pointer"><DropdownMenuItem class="flex items-center gap-4"> <Undo2 class="size-4"/> Refund</DropdownMenuItem></Link>
+                        <Link :href="route('orders.process', order.id)" class="w-full cursor-pointer"><DropdownMenuItem class="flex items-center gap-4"> <Truck class="size-4"/> Process</DropdownMenuItem></Link>
+                        <Link :href="'/'" method="delete" class="w-full cursor-pointer"><DropdownMenuItem class="flex items-center gap-4"> <Undo2 class="size-4"/> Refund</DropdownMenuItem></Link>
                       </DropdownMenuContent>
                     </DropdownMenu>
                     <div class="flex items-center justify-center gap-3">

@@ -81,7 +81,7 @@ const unsetImages = (index: number) => {
 </script>
 
 <template>
-  <Head title="Add Product" />
+  <Head title="Edit Product" />
 
   <AuthenticatedLayout>
     <template #header>
